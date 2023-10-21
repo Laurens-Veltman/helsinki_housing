@@ -30,9 +30,9 @@ def clean_df(df):
     def split_commas(df,column_name):
         for index, row in df.iterrows():
             if ',' in row[column_name]:
-                names = row[column_name].split(',').strip()
+                names = row[column_name].split(',')
                 row1 = row2 = row.copy()
-                row1[column_name],row2[column_name] = names[0],names[1]
+                row1[column_name],row2[column_name] = names[0].strip(),names[1].strip()
                 df.append([row1,row2], ignore_index=True)
                 df.drop(row)
     new_df = split_commas(df,'Toimipaikka')
