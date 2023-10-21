@@ -42,7 +42,7 @@ def main():
     #print(districts.get_polygon(171))
     #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
     
-    m = folium.Map(location=[60.2019,24.9204], zoom_start=11)
+    m = folium.Map(location=[60.2019,24.9204], zoom_start=11, scrollWheelZoom=False, tiles='CartoDB positron')
     folium.GeoJson(file, name='geojson').add_to(m)
     
     # Display the map using Streamlit
