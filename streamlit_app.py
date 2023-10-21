@@ -26,19 +26,22 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
-def clean_data(file, selection):
+def clean_data(geojson, data):
+    selection = data['Toimipaikka'].uniques().lower()
     with open(file) as f:
-        data = json.loads(f.read())
+        json_file = json.loads(f.read())
     
-        for shape in data['features']:
-            st.write(shape)
+        for shape in json_file['features']:
+            if shape['properties']['NIMI'].lower() in selection:
+                st.write(shape)
             #id = int(shape['properties']['TUNNUS'])
-            filtered_data = [row for row in data if row.get('NIMI') not in selection]
+        
 
             
 def main():
-    geojson = "data/helsinki.geojson"
     data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[0:83,:]
+    
+    geojson = "data/helsinki.geojson"
     m = folium.Map(location=[60.2019,24.9204], zoom_start=11, scrollWheelZoom=False, tiles='CartoDB positron')
     folium.GeoJson(geojson, name='geojson').add_to(m)
     st.title('Helsinki housing prices through the years')
@@ -46,7 +49,7 @@ def main():
 
     st.dataframe(data)
 
-    #clean_data(file)
+    clean_data(geojson, data)
 
 if __name__ == '__main__':
     main()
