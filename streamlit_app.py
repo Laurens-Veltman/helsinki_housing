@@ -6,7 +6,7 @@ path = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson?short_pa
 with open(path) as f:
   geojson_data = f.read()
 
-st.json(geojson_data)
+st.write(geojson_data)
 #st.map(geojson_data)
 
 
