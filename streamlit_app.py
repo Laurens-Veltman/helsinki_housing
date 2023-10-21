@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import folium
 
 import json
 from shapely.geometry import Polygon, Point
