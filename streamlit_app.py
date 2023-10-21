@@ -32,7 +32,12 @@ class DistrictJSON:
 def main():
     url = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
     file = requests.get(url)
-    st.write(file)
+    #file = "data/helsinki.geo.json"
+    districts = DistrictJSON(file.text)
+    districts.load()
+    #print(districts.get_polygon(171))
+    #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
+    #st.map(geojson_data)
 
 if __name__ == '__main__':
     main()
