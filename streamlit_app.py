@@ -26,14 +26,14 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
-def data_cleaner(file):
+def data_cleaner(file, selection):
     with open(file) as f:
         data = json.loads(f.read())
     
         for shape in data['features']:
             st.write(shape)
             #id = int(shape['properties']['TUNNUS'])
-            #filtered_data = [row for row in data if row.get('column_name') != 'value_to_drop']
+            filtered_data = [row for row in data if row.get('NIMI') not in selection]
 
             
 def main():
@@ -49,7 +49,9 @@ def main():
     st.title('Helsinki housing prices through the years')
     folium_static(m)
 
-    data_cleaner(file)
+    st.dataframe(pd.read_csv("data/hhdata_csv.csv")
+
+    #data_cleaner(file)
 
 if __name__ == '__main__':
     main()
