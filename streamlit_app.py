@@ -27,16 +27,15 @@ class DistrictJSON:
         return self._poly_dict[id]
 
 def clean_df(df):
-    df_out = pd.DataFrame()
     def splitter(row):
         if ',' in row['Toimipaikka']:
             new_names = row['Toimipaikka'].split(',')
             row1 = row2 = row.copy()
             row1['Toimipaikka'],row1['Toimipaikka'] = new_names[0], new_names[1]
-            out = pd.Series([row1,row2])
+            return [row1,row2]
         else:
-            out = pd.series(row)
-        df_out = pd.concat([df_out,])
+            return row
+        
     df = pd.DataFrame([item for sublist in df.apply(splitter, axis=1).values for item in sublist], columns=df.columns)
     return df.reset_index(drop=True, inplace=True)
 
