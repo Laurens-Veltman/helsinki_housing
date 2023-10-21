@@ -26,22 +26,18 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
-def clean_df(df):
-    def split_commas(df, column_name='Toimipaikka'):
-        def process_row(row):
-            if ',' in row[column_name]:
-                values = row[column_name].split(',')
-                return [{column_name: val.strip(), **{col: row[col] for col in df.columns if col != column_name}} for val in values]
-            else:
-                return {column_name: row[column_name].strip(), **{col: row[col] for col in df.columns if col != column_name}}
-        new_rows = df.apply(process_row, axis=1).tolist()
-        if any(isinstance(item, list) for item in new_rows):
-            new_rows = [item for sublist in new_rows for item in sublist]
-        new_df = pd.DataFrame(new_rows)
-        return new_df
-    new_df = split_commas(df)
+def clean_df(data):
+    def split_commas(row,column_name):
+        if ',' in row[column_name]:
+            names = row[column_name].split(',').strip()
+            row1 = row2 = row.copy()
+            row1[column_name],row2[column_name] = names[0],names[1]
+            df.append([row1,row2], ignore_index=True)
+        else:
+            df.drop(row)
+    new_df = split_commas(df,'Toimipaikka')
     return new_df
-
+    
 def init_mask(geojson, data, m):
     selection = [i.lower() for i in data['Toimipaikka'].unique()]
     rejected = []
