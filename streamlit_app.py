@@ -26,7 +26,7 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
-def clean_df(data):
+def clean_df(df):
     def split_commas(row,column_name):
         if ',' in row[column_name]:
             names = row[column_name].split(',').strip()
