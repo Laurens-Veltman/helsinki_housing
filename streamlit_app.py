@@ -28,15 +28,15 @@ class DistrictJSON:
 
 def clean_df(df):
     def split_commas(df,column_name):
-        new_df = pd.DataFrame(columns=df.columns)
+        new_df = pd.DataFrame()
         for index, row in df.iterrows():
             if ',' in row[column_name]:
                 names = row[column_name].split(',')
                 row1 = row2 = row.copy()
                 row1[column_name],row2[column_name] = names[0].strip(),names[1].strip()
-                new_df = pd.concat([new_df,pd.DataFrame([row1,row2])])
+                new_df = pd.concat([new_df,pd.DataFrame([row1,row2])],ignore_index=True)
             else:
-                new_df = pd.concat([new_df,pd.DataFrame(row)])
+                new_df = pd.concat([new_df,pd.DataFrame(row)],ignore_index=True)
         return new_df
     new_df = split_commas(df,'Toimipaikka')
     return new_df
