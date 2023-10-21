@@ -33,7 +33,7 @@ def pull_file(url):
     geojson_data = requests.get(url).text
     with open(file_name, 'w') as f:
         json.dump(geojson_data, f)
-    return 'output.geojson'
+    return geojson_data
             
 def main():
     url = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
