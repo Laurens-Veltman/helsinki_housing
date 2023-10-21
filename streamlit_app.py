@@ -26,15 +26,15 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
-def pull_file(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        geojson_data = json.loads(response.text)
-        return geojson_data
-    else:
-        # Print an error message if the request was not successful
-        print(f"Failed to fetch the file. Status Code: {response.status_code}")
-        return None
+def data_cleaner(file):
+    with open(file) as f:
+        data = json.loads(f.read())
+    
+        for shape in data['features']:
+            st.write(shape)
+            #id = int(shape['properties']['TUNNUS'])
+            #filtered_data = [row for row in data if row.get('column_name') != 'value_to_drop']
+
             
 def main():
     file = "data/helsinki.geojson"
@@ -48,6 +48,8 @@ def main():
     # Display the map using Streamlit
     st.title('Helsinki housing prices through the years')
     folium_static(m)
+
+    data_cleaner(file)
 
 if __name__ == '__main__':
     main()
