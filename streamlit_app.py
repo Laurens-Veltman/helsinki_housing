@@ -54,8 +54,8 @@ def init_mask(geojson, data, m):
                 folium.GeoJson(shape, name='geojson').add_to(m)
             else:
                 rejected.append(name)
-    st.write(len(rejected))
-    st.write(len(selection))
+    st.write(rejected)
+    st.write(selection)
 
 def main():
     data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[0:83,:]
