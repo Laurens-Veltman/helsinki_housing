@@ -44,8 +44,8 @@ def main():
     file = "data/helsinki.geojson"
     districts = DistrictJSON(file)
     districts.load()
-    #print(districts.get_polygon(171))
-    #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
+    print(districts.get_polygon(171))
+    print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
     #st.map(geojson_data)
 
 if __name__ == '__main__':
