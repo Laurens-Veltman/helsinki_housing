@@ -39,8 +39,9 @@ def main():
     url = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
     file = pull_file(url)
     #file = "data/helsinki.geo.json"
-    districts = DistrictJSON(file)
-    districts.load()
+    st.json(file)
+    #districts = DistrictJSON(file)
+    #districts.load()
     #print(districts.get_polygon(171))
     #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
     #st.map(geojson_data)
