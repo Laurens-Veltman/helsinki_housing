@@ -38,7 +38,7 @@ def clean_data(file, selection):
             
 def main():
     geojson = "data/helsinki.geojson"
-    data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[81]
+    data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[0:81,:]
     m = folium.Map(location=[60.2019,24.9204], zoom_start=11, scrollWheelZoom=False, tiles='CartoDB positron')
     folium.GeoJson(geojson, name='geojson').add_to(m)
     st.title('Helsinki housing prices through the years')
