@@ -27,14 +27,14 @@ class DistrictJSON:
         return self._poly_dict[id]
 
 def clean_df(df):
-    def split_commas(row,column_name):
-        if ',' in row[column_name]:
-            names = row[column_name].split(',').strip()
-            row1 = row2 = row.copy()
-            row1[column_name],row2[column_name] = names[0],names[1]
-            df.append([row1,row2], ignore_index=True)
-        else:
-            df.drop(row)
+    def split_commas(df,column_name):
+        for index, row in df.iterrows():
+            if ',' in row[column_name]:
+                names = row[column_name].split(',').strip()
+                row1 = row2 = row.copy()
+                row1[column_name],row2[column_name] = names[0],names[1]
+                df.append([row1,row2], ignore_index=True)
+                df.drop(row)
     new_df = split_commas(df,'Toimipaikka')
     return new_df
     
