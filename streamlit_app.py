@@ -58,6 +58,7 @@ def init_mask(geojson, data, m):
 def main():
     data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[0:83,:]
     data = clean_df(data)
+    st.dataframe(data)
     geojson = "data/helsinki.geojson"
     m = folium.Map(location=[60.2019,24.9204], zoom_start=11, scrollWheelZoom=False, tiles='CartoDB positron')
     st.title('Helsinki housing prices through the years')
