@@ -36,8 +36,7 @@ def clean_df(df):
                 row1[column_name],row2[column_name] = names[0].strip(),names[1].strip()
                 out = pd.DataFrame([row1,row2]).reset_index(drop=True)
                 new_df = pd.concat([new_df,out],ignore_index=True)
-            else:
-                new_df = pd.concat([new_df,pd.DataFrame(row).reset_index(drop=True)],ignore_index=True)
+            
         return new_df
     new_df = split_commas(df,'Toimipaikka')
     return new_df
