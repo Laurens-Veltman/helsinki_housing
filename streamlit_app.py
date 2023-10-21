@@ -29,7 +29,7 @@ class DistrictJSON:
 
 
 def main():
-    path = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson?short_path=c666dcd"
+    path = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
     districts = DistrictJSON(path)
     districts.load()
     #print(districts.get_polygon(171))
