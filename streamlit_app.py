@@ -42,7 +42,7 @@ def clean_df(df):
     new_df = split_commas(df,'Toimipaikka')
 
     def remove_dashes(row):
-        row[column_name].replace("-", " ")
+        row["Toimipaikka"].replace("-", " ")
                 
     new_df = new_df.apply(remove_dashes)
     return new_df
