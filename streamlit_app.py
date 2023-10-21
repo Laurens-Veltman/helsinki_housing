@@ -18,7 +18,7 @@ class DistrictJSON:
 
     def load(self):
         with open(self._filename) as f:
-            data = json.loads(r"""f.read()""")
+            data = json.loads(r"""(f.read())""")
 
             for shape in data['features']:
                 id = int(shape['properties']['TUNNUS'])
