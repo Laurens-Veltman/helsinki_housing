@@ -33,9 +33,11 @@ def clean_df(df):
             row1 = row2 = row.copy()
             row1['Toimipaikka'],row1['Toimipaikka'] = new_names[0], new_names[1]
             return [row1, row2]
+        else:
+            return row
             
-    return pd.DataFrame([item for sublist in df.apply(splitter, axis=1).values for item in sublist], columns=df.columns)
-
+    df = pd.DataFrame([item for sublist in df.apply(splitter, axis=1).values for item in sublist], columns=df.columns)
+    return df.reset_index(drop=True, inplace=True)
 
 def init_mask(geojson, data, m):
     selection = [i.lower() for i in data['Toimipaikka'].unique()]
