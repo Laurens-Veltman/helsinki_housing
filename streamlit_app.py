@@ -26,6 +26,14 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
+def clean_df(df):
+    def splitter(row):
+        if ',' in row['Toimipaikka']:
+            new_names = row.split(',')
+            
+    return pd.DataFrame([item for sublist in df.apply(splitter, axis=1).values for item in sublist], columns=df.columns)
+
+
 def init_mask(geojson, data, m):
     selection = [i.lower() for i in data['Toimipaikka'].unique()]
     rejected = []
@@ -43,6 +51,7 @@ def init_mask(geojson, data, m):
 
 def main():
     data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[0:83,:]
+    data = clean_df(data)
     geojson = "data/helsinki.geojson"
     m = folium.Map(location=[60.2019,24.9204], zoom_start=11, scrollWheelZoom=False, tiles='CartoDB positron')
     st.title('Helsinki housing prices through the years')
