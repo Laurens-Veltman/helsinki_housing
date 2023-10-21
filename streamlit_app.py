@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 
 import json
 from shapely.geometry import Polygon, Point
@@ -29,9 +30,10 @@ class DistrictJSON:
 
 
 def main():
-    path = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
-    path = "data/helsinki.geo.json"
-    districts = DistrictJSON(path)
+    url = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
+    file = requests.get(url)
+    #file = "data/helsinki.geo.json"
+    districts = DistrictJSON(file)
     districts.load()
     #print(districts.get_polygon(171))
     #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
