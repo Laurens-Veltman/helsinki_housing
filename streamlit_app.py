@@ -40,6 +40,11 @@ def clean_df(df):
                 indices_to_drop.append(index)
         return pd.concat([df.drop(labels=indices_to_drop),new_df],ignore_index=True)
     new_df = split_commas(df,'Toimipaikka')
+
+    def remove_dashes(row):
+        row[column_name].replace("-", " ")
+                
+    new_df = new_df.apply(remove_dashes)
     return new_df
     
 def init_mask(geojson, data, m):
@@ -54,6 +59,8 @@ def init_mask(geojson, data, m):
                 folium.GeoJson(shape, name='geojson').add_to(m)
             else:
                 rejected.append(name)
+    st.write(len(rejected))
+    st.write(len(selection))
     st.write(rejected)
     st.write(selection)
 
