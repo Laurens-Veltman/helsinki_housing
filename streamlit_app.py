@@ -49,7 +49,7 @@ def main():
     st.title('Helsinki housing prices through the years')
     folium_static(m)
 
-    st.dataframe(pd.read_csv("data/hhdata_csv.csv")
+    st.dataframe(pd.read_csv("data/hhdata_csv.csv"))
 
     #data_cleaner(file)
 
