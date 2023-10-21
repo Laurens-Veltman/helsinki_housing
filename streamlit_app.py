@@ -34,9 +34,9 @@ def clean_df(df):
                 names = row[column_name].split(',')
                 row1 = row2 = row.copy()
                 row1[column_name],row2[column_name] = names[0].strip(),names[1].strip()
-                new_df = pd.concat([new_df,pd.DataFrame([row1,row2])],ignore_index=True)
+                new_df = pd.concat([new_df,pd.DataFrame([row1,row2])])
             else:
-                new_df = pd.concat([new_df,pd.DataFrame(row)],ignore_index=True)
+                new_df = pd.concat([new_df,pd.DataFrame(row)])
         return new_df
     new_df = split_commas(df,'Toimipaikka')
     return new_df
