@@ -28,7 +28,7 @@ class DistrictJSON:
 
 def clean_df(df):
     def split_commas(df,column_name):
-        new_df = pd.DataFrame()
+        new_df = pd.DataFrame(columns=df.columns,index=df.index)
         for index, row in df.iterrows():
             if ',' in row[column_name]:
                 names = row[column_name].split(',')
