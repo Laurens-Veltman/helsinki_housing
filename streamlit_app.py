@@ -32,7 +32,7 @@ def clean_df(df):
         for index, row in df.iterrows():
             if ',' in row[column_name]:
                 names = row[column_name].split(',')
-                row1 = row2 = row.copy()
+                row1,row2 = row.copy(),row.copy()
                 row1[column_name],row2[column_name] = names[0].strip(),names[1].strip()
                 st.dataframe(pd.DataFrame([row1,row2]))
                 st.write(names)
