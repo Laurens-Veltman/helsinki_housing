@@ -29,11 +29,15 @@ class DistrictJSON:
         return self._poly_dict[id]
 
 def pull_file(url):
-    file_name = 'output.geojson'
-    geojson_data = requests.get(url).text
-    with open(file_name, 'w') as f:
-        json.dump(geojson_data, f)
-    return geojson_data
+    response = requests.get(url)
+    if response.status_code == 200:
+        # Load the GeoJSON data
+        geojson_data = json.loads(response.text)
+        return geojson_data
+    else:
+        # Print an error message if the request was not successful
+        print(f"Failed to fetch the file. Status Code: {response.status_code}")
+        return None
             
 def main():
     url = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
