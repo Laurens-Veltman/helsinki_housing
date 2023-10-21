@@ -28,13 +28,19 @@ class DistrictJSON:
 
 def init_mask(geojson, data, m):
     selection = [i.lower() for i in data['Toimipaikka'].unique()]
+    rejected = []
     with open(geojson) as f:
         json_file = json.loads(f.read())
     
         for shape in json_file['features']:
-            if shape['properties']['NIMI'].lower() in selection:
+            name = shape['properties']['NIMI'].lower()
+            if name in selection:
                 folium.GeoJson(shape, name='geojson').add_to(m)
-            
+            else:
+                rejected.append(name)
+    st.write(rejected)
+    st.write(selection)
+
 def main():
     data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[0:83,:]
     geojson = "data/helsinki.geojson"
