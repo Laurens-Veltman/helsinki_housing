@@ -53,7 +53,7 @@ def init_mask(geojson, data, m):
             else:
                 rejected.append(name)
     st.write(len(rejected))
-    st.write(len(selected))
+    st.write(len(selection))
 
 def main():
     data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[0:83,:]
