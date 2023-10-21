@@ -44,7 +44,7 @@ def clean_df(df):
     def remove_dashes(row):
         row["Toimipaikka"].replace("-", " ")
                 
-    new_df['Toimipaikka']= df.apply(remove_dashes, axis=1)
+    #new_df['Toimipaikka']= df.apply(remove_dashes, axis=1)
     return new_df
     
 def init_mask(geojson, data, m):
