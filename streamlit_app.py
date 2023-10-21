@@ -34,7 +34,7 @@ def clean_df(df):
                 names = row[column_name].split(',')
                 row1,row2 = row.copy(),row.copy()
                 row1[column_name],row2[column_name] = names[0].strip(),names[1].strip()
-                st.dataframe(pd.DataFrame([row1,row2]))
+                st.dataframe(pd.DataFrame([row1,row2]).reset_index(drop=True))
                 st.write(names)
                 new_df = pd.concat([new_df,pd.DataFrame([row1,row2])],ignore_index=True)
             else:
