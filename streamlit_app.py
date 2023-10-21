@@ -26,7 +26,8 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
-def clean_df(df):
+def clean_df(data):
+    df = pd.DataFrame(data)
     def process_data(df, column_name='Toimipaikka'):
         def process_row(row):
             if ',' in row[column_name]:
