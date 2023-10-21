@@ -37,20 +37,17 @@ def pull_file(url):
         return None
             
 def main():
-    url = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
-    file = pull_file(url)
     file = "data/helsinki.geojson"
     districts = DistrictJSON(file)
     #print(districts.get_polygon(171))
     #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
     
     m = folium.Map(location=[60.2019,24.9204], zoom_start=11)
-    folium.GeoJson(file, name='geojson').add_to(m)
+    folium.GeoJson(districts._poly_dict, name='geojson').add_to(m)
     
     # Display the map using Streamlit
-    st.title('GeoJSON Visualization with Folium in Streamlit')
+    st.title('Helsinki housing prices through the years')
     folium_static(m)
-    #districts._poly_dict
 
 if __name__ == '__main__':
     main()
