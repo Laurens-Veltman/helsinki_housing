@@ -27,7 +27,7 @@ class DistrictJSON:
         return self._poly_dict[id]
 
 def clean_data(geojson, data):
-    selection = data['Toimipaikka'].unique().lower()
+    selection = [i.lower() for i in data['Toimipaikka'].unique()]
     with open(file) as f:
         json_file = json.loads(f.read())
     
