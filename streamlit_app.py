@@ -41,7 +41,7 @@ def pull_file(url):
 def main():
     url = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
     file = pull_file(url)
-    file = "data/helsinki.geo.json"
+    file = "data/helsinki.geojson"
     districts = DistrictJSON(file)
     districts.load()
     #print(districts.get_polygon(171))
