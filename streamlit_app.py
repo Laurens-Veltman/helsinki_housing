@@ -5,7 +5,6 @@ import json
 from shapely.geometry import Polygon, Point
 
 #path = "data/helsinki.geo.json"
-#path = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson?short_path=c666dcd"
 #with open(path) as f:
 #  geojson_data = f.read()
 
@@ -30,11 +29,11 @@ class DistrictJSON:
 
 
 def main():
-    file = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson?short_path=c666dcd"
-    districts = DistrictJSON(file)
+    path = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson?short_path=c666dcd"
+    districts = DistrictJSON(path)
     districts.load()
-    print(districts.get_polygon(171))
-    print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
+    #print(districts.get_polygon(171))
+    #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
     #st.map(geojson_data)
 
 if __name__ == '__main__':
