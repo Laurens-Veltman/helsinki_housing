@@ -28,11 +28,17 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
-
+def pull_file(url):
+    file_name = 'output.geojson'
+    geojson_data = requests.get(url).text
+    with open(file_name, 'w') as f:
+        json.dump(geojson_data, f)
+    return file_name
+            
 def main():
     url = "https://github.com/dhh16/helsinki/blob/master/osaalueet.geojson"
-    file = requests.get(url).text
-    file = "data/helsinki.geo.json"
+    file = pull_file(url)
+    #file = "data/helsinki.geo.json"
     districts = DistrictJSON(file)
     districts.load()
     #print(districts.get_polygon(171))
