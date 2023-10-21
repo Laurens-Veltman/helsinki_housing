@@ -51,7 +51,7 @@ def init_mask(geojson, data, m):
         json_file = json.loads(f.read())
     
         for shape in json_file['features']:
-            name = shape['properties']['NIMI'].lower()
+            name = shape['properties']['NIMI'].lower().replace('-', ' ')
             if name in selection:
                 folium.GeoJson(shape, name='geojson').add_to(m)
             else:
