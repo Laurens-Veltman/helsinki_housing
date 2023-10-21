@@ -27,18 +27,20 @@ class DistrictJSON:
         return self._poly_dict[id]
 
 def clean_df(df):
-    def split_rows_with_comma(df, column_name):
-        new_rows = []
-        for index, row in df.iterrows():
+    def process_data(df, column_name='Toimipaikka'):
+        def process_row(row):
             if ',' in row[column_name]:
                 values = row[column_name].split(',')
-                new_rows.append({column_name: values[0]})
-                new_rows.append({column_name: values[1]})
+                return [{column_name: val.strip(), **{col: row[col] for col in df.columns if col != column_name}} for val in values]
             else:
-                new_rows.append({column_name: row[column_name]})
-        new_df = pd.DataFrame(new_rows)
+                return {column_name: row[column_name].strip(), **{col: row[col] for col in df.columns if col != column_name}}
+        new_rows = df.apply(process_row, axis=1).tolist()
+        if any(isinstance(item, list) for item in new_rows):
+            new_rows = [item for sublist in new_rows for item in sublist]
+        new_df = pd.DataFrame(new_rows, columns=df.columns)
         return new_df
-    return split_rows_with_comma(df, 'Toimipaikka')
+    new_df = process_data(df)
+    return new_df
 
 def init_mask(geojson, data, m):
     selection = [i.lower() for i in data['Toimipaikka'].unique()]
