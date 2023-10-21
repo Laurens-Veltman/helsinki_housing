@@ -34,7 +34,7 @@ def clean_df(df):
                 row1 = row2 = row.copy()
                 row1[column_name],row2[column_name] = names[0].strip(),names[1].strip()
                 df = pd.concat([df,pd.DataFrame([row1,row2])], ignore_index=True)
-                df.drop(row)
+                df.drop(row,axis=1)
     new_df = split_commas(df,'Toimipaikka')
     return new_df
     
