@@ -32,7 +32,7 @@ def clean_df(df):
             new_names = row['Toimipaikka'].split(',')
             row1 = row2 = row.copy()
             row1['Toimipaikka'],row1['Toimipaikka'] = new_names[0], new_names[1]
-            return row1,row2
+            st.write([row1,row2])
         else:
             return row
         
