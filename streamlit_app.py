@@ -4,6 +4,7 @@ import requests
 
 import json
 from shapely.geometry import Polygon, Point
+from streamlit_folium import folium_static
 
 class DistrictJSON:
     def __init__(self, filename):
@@ -39,10 +40,16 @@ def main():
     file = pull_file(url)
     file = "data/helsinki.geojson"
     districts = DistrictJSON(file)
-    districts.load()
-    print(districts.get_polygon(171))
-    print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
-    st.map(districts._poly_dict)
+    #print(districts.get_polygon(171))
+    #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
+    
+    m = folium.Map(location=[0, 0], zoom_start=2)
+    folium.GeoJson(file, name='geojson').add_to(m)
+    
+    # Display the map using Streamlit
+    st.title('GeoJSON Visualization with Folium in Streamlit')
+    folium_static(m)
+    #districts._poly_dict
 
 if __name__ == '__main__':
     main()
