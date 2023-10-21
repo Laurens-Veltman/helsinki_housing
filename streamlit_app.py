@@ -28,17 +28,16 @@ class DistrictJSON:
 
 def clean_df(df):
     def split_rows_with_comma(df, column_name):
-    new_rows = []
-    for index, row in df.iterrows():
-        if ',' in row[column_name]:
-            values = row[column_name].split(',')
-            new_rows.append({column_name: values[0]})
-            new_rows.append({column_name: values[1]})
-        else:
-            new_rows.append({column_name: row[column_name]})
-    new_df = pd.DataFrame(new_rows)
-    return new_df
-
+        new_rows = []
+        for index, row in df.iterrows():
+            if ',' in row[column_name]:
+                values = row[column_name].split(',')
+                new_rows.append({column_name: values[0]})
+                new_rows.append({column_name: values[1]})
+            else:
+                new_rows.append({column_name: row[column_name]})
+        new_df = pd.DataFrame(new_rows)
+        return new_df
     return split_rows_with_comma(df, 'Toimipaikka')
 
 def init_mask(geojson, data, m):
