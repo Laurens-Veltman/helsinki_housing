@@ -26,9 +26,8 @@ class DistrictJSON:
     def get_polygon(self, id):
         return self._poly_dict[id]
 
-def clean_df(data):
-    df = pd.DataFrame(data)
-    def process_data(df, column_name='Toimipaikka'):
+def clean_df(df):
+    def split_commas(df, column_name='Toimipaikka'):
         def process_row(row):
             if ',' in row[column_name]:
                 values = row[column_name].split(',')
@@ -38,9 +37,9 @@ def clean_df(data):
         new_rows = df.apply(process_row, axis=1).tolist()
         if any(isinstance(item, list) for item in new_rows):
             new_rows = [item for sublist in new_rows for item in sublist]
-        new_df = pd.DataFrame(new_rows, columns=df.columns)
+        new_df = pd.DataFrame(new_rows)
         return new_df
-    new_df = process_data(df)
+    new_df = split_commas(df)
     return new_df
 
 def init_mask(geojson, data, m):
