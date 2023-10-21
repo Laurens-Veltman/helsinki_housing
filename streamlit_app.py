@@ -28,7 +28,7 @@ class DistrictJSON:
 
 def clean_data(geojson, data):
     selection = [i.lower() for i in data['Toimipaikka'].unique()]
-    with open(file) as f:
+    with open(geojson) as f:
         json_file = json.loads(f.read())
     
         for shape in json_file['features']:
