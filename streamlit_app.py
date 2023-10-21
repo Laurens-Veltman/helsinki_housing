@@ -29,7 +29,10 @@ class DistrictJSON:
 def clean_df(df):
     def splitter(row):
         if ',' in row['Toimipaikka']:
-            new_names = row.split(',')
+            new_names = row['Toimipaikka'].split(',')
+            row1 = row2 = row.copy()
+            row1['Toimipaikka'],row1['Toimipaikka'] = new_names[0], new_names[1]
+            return [row1, row2]
             
     return pd.DataFrame([item for sublist in df.apply(splitter, axis=1).values for item in sublist], columns=df.columns)
 
@@ -46,8 +49,8 @@ def init_mask(geojson, data, m):
                 folium.GeoJson(shape, name='geojson').add_to(m)
             else:
                 rejected.append(name)
-    st.write(rejected)
-    st.write(selection)
+    st.write(len(rejected))
+    st.write(len(selected))
 
 def main():
     data = pd.read_csv("data/hhdata_csv.csv",header=4).iloc[0:83,:]
