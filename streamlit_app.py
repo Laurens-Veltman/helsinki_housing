@@ -37,19 +37,14 @@ def data_cleaner(file, selection):
 
             
 def main():
-    file = "data/helsinki.geojson"
-    districts = DistrictJSON(file)
-    #print(districts.get_polygon(171))
-    #print(districts.get_polygon(171).contains(Point(24.92046539288323, 60.20190764575884)))
-    
+    geojson = "data/helsinki.geojson"
+    data = pd.read_csv("data/hhdata_csv.csv",header=4)
     m = folium.Map(location=[60.2019,24.9204], zoom_start=11, scrollWheelZoom=False, tiles='CartoDB positron')
-    folium.GeoJson(file, name='geojson').add_to(m)
-    
-    # Display the map using Streamlit
+    folium.GeoJson(geojson, name='geojson').add_to(m)
     st.title('Helsinki housing prices through the years')
     folium_static(m)
 
-    st.dataframe(pd.read_csv("data/hhdata_csv.csv"))
+    st.dataframe(data)
 
     #data_cleaner(file)
 
