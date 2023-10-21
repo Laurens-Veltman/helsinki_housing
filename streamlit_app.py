@@ -27,6 +27,7 @@ class DistrictJSON:
         return self._poly_dict[id]
 
 def clean_df(df):
+    column_name = 'Toimipaikka'
     def split_commas(df,column_name):
         new_df = pd.DataFrame(columns=df.columns)
         indices_to_drop = []
@@ -39,12 +40,8 @@ def clean_df(df):
                 new_df = pd.concat([new_df,out],ignore_index=True)
                 indices_to_drop.append(index)
         return pd.concat([df.drop(labels=indices_to_drop),new_df],ignore_index=True)
-    new_df = split_commas(df,'Toimipaikka')
-
-    def remove_dashes(row):
-        row["Toimipaikka"].replace("-", " ")
-                
-    #new_df['Toimipaikka']= df.apply(remove_dashes, axis=1)
+    new_df = split_commas(df, column_name)
+    new_df[column_name] = new_df[column_name].str.replace('-', ' ')
     return new_df
     
 def init_mask(geojson, data, m):
