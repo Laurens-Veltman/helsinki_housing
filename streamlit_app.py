@@ -42,8 +42,9 @@ def clean_df(df):
         return pd.concat([df.drop(labels=indices_to_drop),new_df],ignore_index=True)
         
     def remove_adjectives(df,column_name='Toimipaikka'):
-        substrings_to_remove = ["pohjois", "etu", "länsi"]
+        substrings_to_remove = ["pohjois", "etu", "länsi", "taka", "itä", "et."]
         def remove_substring(main_string):
+            main_string = main_string.lower()
             for substring in substrings_to_remove:
                 if substring in main_string:
                     main_string = main_string.replace(substring, '')
