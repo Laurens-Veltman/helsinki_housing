@@ -40,12 +40,27 @@ def clean_df(df):
                 new_df = pd.concat([new_df,out],ignore_index=True)
                 indices_to_drop.append(index)
         return pd.concat([df.drop(labels=indices_to_drop),new_df],ignore_index=True)
+        
+    def remove_adjectives(df,column_name='Toimipaikka')
+        substrings_to_remove = ["pohjois", "etu", "länsi"]
+        def remove_substring()
+            for substring in substrings_to_remove:
+                if substring in main_string:
+                    main_string = main_string.replace(substring, '')
+            return main_string.strip()
+        return df[column_name].apply(remove_substring())
+    
+    # split commas
     new_df = split_commas(df, column_name)
+    # replace dashes
     new_df[column_name] = new_df[column_name].str.replace('-', ' ')
+    # remove adjectives
+    new_df[column_name] = remove_adjectives(new_df)
     return new_df
     
 def init_mask(geojson, data, m):
     selection = [i.lower() for i in data['Toimipaikka'].unique()]
+    in_selection = 0
     rejected = []
     with open(geojson) as f:
         json_file = json.loads(f.read())
@@ -54,10 +69,11 @@ def init_mask(geojson, data, m):
             name = shape['properties']['NIMI'].lower().replace('-', ' ')
             if name in selection:
                 folium.GeoJson(shape, name='geojson').add_to(m)
+                in_selection += 1
             else:
                 rejected.append(name)
     st.write(len(rejected))
-    st.write(len(selection))
+    st.write(f"{in_selection}/{len(selection)}")
     st.write(rejected)
     st.write(selection)
 
