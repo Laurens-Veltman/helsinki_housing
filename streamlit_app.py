@@ -43,7 +43,7 @@ def clean_df(df):
         
     def remove_adjectives(df,column_name='Toimipaikka'):
         substrings_to_remove = ["pohjois", "etu", "länsi"]
-        def remove_substring()
+        def remove_substring():
             for substring in substrings_to_remove:
                 if substring in main_string:
                     main_string = main_string.replace(substring, '')
