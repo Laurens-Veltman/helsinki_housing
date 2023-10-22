@@ -48,7 +48,7 @@ def clean_df(df):
                 if substring in main_string:
                     main_string = main_string.replace(substring, '')
             return main_string.strip()
-        return df[column_name].apply(remove_substring())
+        return df[column_name].apply(remove_substring)
     
     # split commas
     new_df = split_commas(df, column_name)
